@@ -1,6 +1,6 @@
 const fs = require("fs/promises");
 const path = require("path");
-// const { v4: uuidv4 } = require("uuid");
+const { v4: uuidv4 } = require("uuid");
 
 const contactsPath = path.resolve("db/contacts.json");
 
@@ -43,21 +43,21 @@ async function removeContact(contactId) {
   }
 }
 
-// async function addContact(name, email, phone) {
-//   try {
-//     const contacts = await listContacts();
-//     const newContact = { id: uuidv4(), name, email, phone };
-//     const newContactsList = JSON.stringify([...contacts, newContact]);
-//     fs.writeFile(contactsPath, newContactsList);
-//     return newContact;
-//   } catch (err) {
-//     return console.error(err);
-//   }
-// }
+async function addContact(name, email, phone) {
+  try {
+    const contacts = await listContacts();
+    const newContact = { id: uuidv4(), name, email, phone };
+    const newContactsList = JSON.stringify([...contacts, newContact]);
+    fs.writeFile(contactsPath, newContactsList);
+    return newContact;
+  } catch (err) {
+    return console.error(err);
+  }
+}
 
 module.exports = {
   listContacts,
   getContactById,
   removeContact,
-  //   addContact,
+  addContact,
 };
